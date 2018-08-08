@@ -58,8 +58,9 @@ function init() {
     JSONLoader.load(
         'models/Pawn.model.json',
         function(geometry, materials){
-            var material = materials;
+            var material = whiteMaterial;
             var object = new THREE.Mesh(geometry, material);
+            object.position.set(0, 2, 0)
             scene.add(object);
         },
         function(xhr){
@@ -86,6 +87,7 @@ function init() {
     document.addEventListener( 'mousedown', onMouseDown, false );
     document.addEventListener( 'contextmenu', onContextMenu, false );
     window.addEventListener( 'resize', onWindowResize, false );
+    window.addEventListener('mousemove', onMouseMove, false);
 }
 
 function animate() {
@@ -97,15 +99,6 @@ function animate() {
 }
 
 ////////////////////////////////////////////////////////////////////////// INIT CONSTRUCTORS
-
-function raycast(){
-    // Raycaster Update
-    raycaster.setFromCamera(mouse, camera);
-    var intersects = raycaster.intersectObjects(scene.children);
-    for(var i = 0; i<intersects.length; i++){
-        intersects[i].object.material.color.set(0xff0000);
-    }
-}
 
 function createLight(){
     light = new THREE.AmbientLight( 0x404040 );
@@ -171,6 +164,24 @@ function onWindowResize() {
 
 }
 
+function raycast(){
+    var intersectAll = false;
+    // Raycaster Update
+    raycaster.setFromCamera(mouse, camera);
+    var intersects = raycaster.intersectObjects(scene.children);
+    if(intersects[0]){
+        if(intersectAll){
+            for(var i = 0; i<intersects.length; i++){
+                intersects[i].object.material.color.set(0xff0000);
+            }
+        }else{
+            for(var i = 0; i<1; i++){
+                intersects[i].object.material.color.set(0xff0000);
+            }
+        }
+    }
+}
+
 function onContextMenu( event ) {
 	event.preventDefault();
 }
@@ -186,7 +197,6 @@ function onMouseDown( event ) {
     
     switch ( event.which ) {
         case 1: // left mouse click
-            console.log(event.clientX, event.clientY);
             mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
             mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
             

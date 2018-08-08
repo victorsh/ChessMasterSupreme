@@ -33,8 +33,8 @@
 # Tech Breakdown
 #### WebGL(THREEJS/AFRAME)
   - Allows users to interact with ERC721 token through 3D objects
-    - [Click Pieces] Add RayCaster Functionality to pieces
-    - Add 3D object import functionality
+    - [x] [Click Pieces] Add RayCaster Functionality to pieces
+    - [x] Add 3D object import functionality
       - Download 3D object from IPFS
 #### IPFS(Dynamic Hash Table)
   - Allows free file storage over a decentralized network.
@@ -64,9 +64,14 @@
 - [ ] Use React/React-Native to integrate ThreeJS/Aframe with React
 
 ## Issues
+#### THREEJS
+- [x] Raycaster only changing based on camera lookAt position
+- [x] Raycaster mouse click position slightly wrong
+#### Token
 - [ ] Random function in Token Contract
   - Giving error with *SHA3* implementation
   - Looking into *Keccak*
+#### IPFS
 - [ ] IPFS domain name
 
 ## Fixes
