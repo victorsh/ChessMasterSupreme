@@ -10,6 +10,28 @@ $('document').ready(()=>{
     animate();
 });
 
+// init web3
+if (typeof web3 !== 'undefined') {
+    web3 = new Web3(web3.currentProvider);
+    console.log('Web3 on!');
+} else {
+    // set the provider you want from Web3.providers
+    console.log('Set Web3 provider');
+    web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+}
+
+getBalance();
+
+async function getBalance(){
+    try{
+        let balance = await web3.eth.getBalance("0x3d57486fdb756ce2309ac583bd2cb333ebfcd59d");
+        console.log(balance);
+    }catch(e){
+        console.log(e);
+    }
+
+}
+
 ////////////////////////////////////////////////////////////////////////// VARIABLES
 
 var camera, scene, renderer, controls, 
@@ -56,7 +78,7 @@ function init() {
     manager = new THREE.LoadingManager();
     JSONLoader = new THREE.JSONLoader(manager);
     JSONLoader.load(
-        'models/Pawn.model.json',
+        'models/Chess_Pieces/Pawn.model.json',
         function(geometry, materials){
             var material = whiteMaterial;
             var object = new THREE.Mesh(geometry, material);
@@ -70,6 +92,20 @@ function init() {
             console.log('An error occured')
         }
     );
+
+    OBJLoader = new THREE.OBJLoader(manager);
+    OBJLoader.load(
+        'models/VW_Bus/VW_Bus.obj',
+        function(object){
+            scene.add(object);
+        },
+        function(xhr){
+            console.log((xhr.loaded/xhr.total * 100) + '% loaded');
+        },
+        function (error){
+            console.log('An error occured')
+        }
+    )
 
     createLight();
     createBoard();
