@@ -1,6 +1,6 @@
 pragma solidity ^0.4.24;
 
-import "../node_modules/zeppelin-solidity/contracts/ownership/Ownable.sol";
+import "../../node_modules/zeppelin-solidity/contracts/ownership/Ownable.sol";
 import "./CMSToken.sol";
 
 contract ChessPieceGame is Ownable {

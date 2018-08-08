@@ -30,6 +30,23 @@
   - Board Position
   - Location of Piece in Game(Deck, Board, Hand)
 
+# Tech Breakdown
+#### WebGL(THREEJS/AFRAME)
+  - Allows users to interact with ERC721 token through 3D objects
+    - [Click Pieces] Add RayCaster Functionality to pieces
+    - Add 3D object import functionality
+      - Download 3D object from IPFS
+#### IPFS(Dynamic Hash Table)
+  - Allows free file storage over a decentralized network.
+  - Store 3D objects on IPFS
+  - Store entire front end on IPFS?
+#### React-Native (not yet added)
+  - This will allow cross-platform development between (iOS, Android, Web)
+#### Token (ERC721)
+  - Deploy ERC721 token with randomized strings
+  - Add basic functionality to token such as
+    - Game Mechanics
+
 # Task List
 - [x] Create a basic ERC721 Contract using OpenZeppelin-Solidity
   - Research Random() with solidity.
@@ -45,6 +62,12 @@
   - Contract ABI
   - Contract Address
 - [ ] Use React/React-Native to integrate ThreeJS/Aframe with React
+
+## Issues
+- [ ] Random function in Token Contract
+  - Giving error with *SHA3* implementation
+  - Looking into *Keccak*
+- [ ] IPFS domain name
 
 ## Fixes
 - Error when deploying contract: Gas amount was not enough
