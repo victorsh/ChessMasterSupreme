@@ -21,13 +21,21 @@
 
 - Parameter Logic
   - (RR) Require Ratio: MD * AP * KD * CD = 1
-    - * Need to look into Translation to Token
+    - Need to look into Translation to Token
   - Regardles off RR, AP = AP + X if Type advantage over opponent
 - Piece Game Parameters:
   - Health
   - Moves Left Per Round
   - Board Position
   - Location of Piece in Game(Deck, Board, Hand)
+
+# Simple-IPFS
+- https://gateway.ipfs.io/ipfs/QmaajvPKwpv1yDwh1BTxBf1JS7tjyFgA9FFwxoct5kfSHe
+
+#### Commands IPFS
+- `ipfs daemon`
+- `ipfs add -r <folder to host>`
+- `https://gateway.ipfs.io/ipfs/<address hash>`
 
 # Task List
 1. [x] Create a basic ERC721 Contract using OpenZeppelin-Solidity
@@ -44,7 +52,8 @@
 8. [ ] Use React/React-Native to integrate ThreeJS/Aframe with React
 
 ## Todo
-- !!! Fix vulnerabilties; Don't use truffle unpack, too many vulnerabilities
+- !!! Fix vulnerabilties
+  - Don't use truffle unpack, too many vulnerabilities
 - (Ropsten)Deploy Token to Test-Net
   - Look into parameter( totalSupply, decimal)
 - Create game logic which incorporates ERC721
@@ -63,6 +72,7 @@
 - [ERC721-Tut-jun18](https://medium.com/coinmonks/a-simple-erc-721-example-c3f72b5aa19)
 - [Complete ERC721 Game](https://github.com/PortalNetwork/nifty-game)
 - [React + ThreeJS](https://itnext.io/how-to-use-plain-three-js-in-your-react-apps-417a79d926e0)
+- [IPFS Hosting](https://medium.com/coinmonks/how-i-hosted-my-website-on-ipfs-431919d7440a)
 
 ## Commands
 - `ganache-cli --gasLimit 0xffffffffff -p 8545`
