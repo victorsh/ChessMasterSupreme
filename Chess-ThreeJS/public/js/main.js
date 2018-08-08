@@ -1,21 +1,75 @@
+/*
+    CHESS MASTER SUPREME
+    .:Graphicalsssssss:.
+
+*/
+////////////////////////////////////////////////////////////////////////// READY RUNNER
+
+$('document').ready(()=>{
+    init();
+    animate();
+});
+
+////////////////////////////////////////////////////////////////////////// VARIABLES
+
 var camera, scene, renderer, controls, 
-    light, mesh, ui, mouse,
-    raycaster;
+    light, mesh,
+    raycaster, ui, mouse,
+    OBJLoader, JSONLoader, manager;
 
 var lights = [];
+
+var playerOneCam = new THREE.Vector3(0,10,15);
+var playerTwoCam = new THREE.Vector3(0,10, -15);
+
+var blackMaterial = new THREE.MeshPhongMaterial({
+    color: 0x110C11,
+    reflectivity: 0.1,
+    shininess: 20,
+    flatShading: THREE.SmoothShading
+});
+
+var whiteMaterial = new THREE.MeshPhongMaterial({
+    color: 0xFCF6E3,
+    reflectivity: 0.1,
+    shininess: 20,
+    flatShading: THREE.SmoothShading
+});
+
+////////////////////////////////////////////////////////////////////////// INIT
 
 function init() {
     camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 10000 );
     controls = new THREE.OrbitControls( camera );
 
     //controls.update() must be called after any manual changes to the camera's transform
-    camera.position.set( 0, 0, 10 );
+    camera.position.set( 0, 10, 15 );
+    camera.lookAt(0, 0, 0);
     controls.update();
 
     raycaster = new THREE.Raycaster();
+    mouse = new THREE.Vector2();
+
     scene = new THREE.Scene();
 
-    
+    // Load Objects
+    manager = new THREE.LoadingManager();
+    JSONLoader = new THREE.JSONLoader(manager);
+    JSONLoader.load(
+        'models/Pawn.model.json',
+        function(geometry, materials){
+            var material = materials;
+            var object = new THREE.Mesh(geometry, material);
+            scene.add(object);
+        },
+        function(xhr){
+            console.log((xhr.loaded/xhr.total * 100) + '% loaded');
+        },
+        function (error){
+            console.log('An error occured')
+        }
+    );
+
     createLight();
     createBoard();
     createPieces();
@@ -32,14 +86,25 @@ function init() {
     document.addEventListener( 'mousedown', onMouseDown, false );
     document.addEventListener( 'contextmenu', onContextMenu, false );
     window.addEventListener( 'resize', onWindowResize, false );
-
 }
 
 function animate() {
+    //Scene update
     requestAnimationFrame( animate );
 
     controls.update();
     renderer.render( scene, camera );
+}
+
+////////////////////////////////////////////////////////////////////////// INIT CONSTRUCTORS
+
+function raycast(){
+    // Raycaster Update
+    raycaster.setFromCamera(mouse, camera);
+    var intersects = raycaster.intersectObjects(scene.children);
+    for(var i = 0; i<intersects.length; i++){
+        intersects[i].object.material.color.set(0xff0000);
+    }
 }
 
 function createLight(){
@@ -87,7 +152,7 @@ function createUI(){
     ui = new THREE.Mesh(o, c);
     ui.material.side = THREE.DoubleSide;
     ui.position.set(10,1,1);
-    //m.rotateY(1);
+    ui.rotateY(1);
     scene.add(ui);
 }
 
@@ -95,10 +160,7 @@ function updateUI(){
 
 }
 
-$('document').ready(()=>{
-    init();
-    animate();
-});
+////////////////////////////////////////////////////////////////////////// Interactions
 
 function onWindowResize() {
 
@@ -113,6 +175,11 @@ function onContextMenu( event ) {
 	event.preventDefault();
 }
 
+function onMouseMove( event ) {
+    mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
+    mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+}
+
 function onMouseDown( event ) {
   var mouse = new THREE.Vector2();
     event.preventDefault();
@@ -122,6 +189,8 @@ function onMouseDown( event ) {
             console.log(event.clientX, event.clientY);
             mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
             mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
+            
+            raycast();
             // console.log(mouse);
             // mouse.unproject( camera );
             // console.log(mouse);

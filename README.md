@@ -80,6 +80,8 @@
 - [React + ThreeJS](https://itnext.io/how-to-use-plain-three-js-in-your-react-apps-417a79d926e0)
 - [IPFS Hosting](https://medium.com/coinmonks/how-i-hosted-my-website-on-ipfs-431919d7440a)
 - [IPFS EC2 Hosting](https://medium.com/textileio/tutorial-setting-up-an-ipfs-peer-part-i-de48239d82e0)
+- [3D Objects](https://free3d.com/)
+- [Chess JSON Obj](https://bl.ocks.org/starcalibre/f0ce91448c076f2d43074dcef5bdfb16)
 
 # Simple-IPFS
 - https://gateway.ipfs.io/ipfs/QmaajvPKwpv1yDwh1BTxBf1JS7tjyFgA9FFwxoct5kfSHe
