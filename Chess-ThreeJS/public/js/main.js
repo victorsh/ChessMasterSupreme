@@ -153,7 +153,7 @@ function updateUI(){
 
 }
 
-////////////////////////////////////////////////////////////////////////// Interactions
+////////////////////////////////////////////////////////////////////////// Environment
 
 function onWindowResize() {
 
@@ -163,6 +163,12 @@ function onWindowResize() {
   renderer.setSize( window.innerWidth, window.innerHeight );
 
 }
+
+function onContextMenu( event ) {
+	event.preventDefault();
+}
+
+////////////////////////////////////////////////////////////////////////// Interactions
 
 function raycast(){
     var intersectAll = false;
@@ -182,24 +188,20 @@ function raycast(){
     }
 }
 
-function onContextMenu( event ) {
-	event.preventDefault();
-}
-
 function onMouseMove( event ) {
     mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
     mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
 }
 
 function onMouseDown( event ) {
-  var mouse = new THREE.Vector2();
+    mouse = new THREE.Vector2();
     event.preventDefault();
     
     switch ( event.which ) {
         case 1: // left mouse click
             mouse.x = ( event.clientX / window.innerWidth ) * 2 - 1;
             mouse.y = - ( event.clientY / window.innerHeight ) * 2 + 1;
-            
+
             raycast();
             // console.log(mouse);
             // mouse.unproject( camera );

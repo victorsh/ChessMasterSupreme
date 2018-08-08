@@ -65,8 +65,13 @@
 
 ## Issues
 #### THREEJS
+- [X] Import 3D object
 - [x] Raycaster only changing based on camera lookAt position
 - [x] Raycaster mouse click position slightly wrong
+- [ ] Set & Update UI 2D Mesh (green rectangle)
+- [ ] Add text functionality
+  - [ ] 2D
+  - [ ] 3D
 #### Token
 - [ ] Random function in Token Contract
   - Giving error with *SHA3* implementation
